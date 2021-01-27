@@ -1,11 +1,10 @@
 package Algorithm;
 
-import Algorithm.AbstractAlgorithm;
-
 public class Huffman extends AbstractAlgorithm {
     @Override
-    public void compress() {
+    public byte[] compress(byte[] data) {
         //TODO
+        return data;
     }
 
     @Override
