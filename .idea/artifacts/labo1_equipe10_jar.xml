@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="jar" build-on-make="true" name="labo1-equipe10:jar">
+    <output-path>$PROJECT_DIR$/out/artifacts/labo1_equipe10_jar</output-path>
+    <root id="archive" name="LOG320_LAB01.jar">
+      <element id="module-output" name="LOG320_LAB01" />
+    </root>
+  </artifact>
+</component>
