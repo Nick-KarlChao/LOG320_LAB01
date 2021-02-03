@@ -1,4 +1,5 @@
 import Algorithm.AbstractAlgorithm;
+import Algorithm.LZW;
 
 import java.io.IOException;
 import java.nio.file.Files;
@@ -11,11 +12,15 @@ public class Main {
     public static void main (String[] args) throws IOException {
         //AbstractAlgorithm algorithm = (new AlgorithmFactory(args[0])).getAlgorithm();
         //readAllBytes will create a temp table that contains the same shit as the original file to comp/decomp
-        byte[] data = Files.readAllBytes(Paths.get("C:/Users/N3/Downloads/peped.jpg"));
-        System.out.println(Arrays.toString(data));
-        System.out.println(data.length);
-        System.out.println(data);
-        System.out.println(Integer.toHexString(data[1]));
+        byte[] data = Files.readAllBytes(Paths.get("src/exemple.txt"));
+//        System.out.println(Arrays.toString(data));
+//        System.out.println(data.length);
+//        System.out.println(data);
+//        System.out.println(Integer.toHexString(data[1]));
+
+        AbstractAlgorithm algo = new LZW();
+        algo.compress(data);
+
         /*switch(args[1]){
             case "-c":
                 //compress will create temp table with compressed data and then we use that table to create a new file

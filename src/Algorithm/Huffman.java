@@ -10,15 +10,17 @@ public class Huffman extends AbstractAlgorithm {
         System.out.println("You have chosen Huffman!");
     }
     @Override
-    public void compress() {
-        System.out.println("You have chosen to compress!");
+    public byte[] compress(byte[] data){
+        System.out.println("You have chosen to compress with Huffman!");
         //TODO
+        return null;
     }
 
     @Override
-    public void decompress() {
-        System.out.println("You have chosen to decompress!");
+    public byte[] decompress(byte[] data){
+        System.out.println("You have chosen to compress with Huffman!");
         //TODO
+        return null;
     }
 
     private void createFrequencyTable(){
