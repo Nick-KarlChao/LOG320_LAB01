@@ -8,7 +8,7 @@ public class LZW extends AbstractAlgorithm {
     //to optimize with hashmap at the end
     private ArrayList<String> dictionnary;
     private ArrayList<Integer> dataCode;
-    private ArrayList<Character> dataDecode;
+    private ArrayList<String> dataDecode;
     private String testString = "ababcbababaaaaaaa";
 
     public LZW(){
@@ -56,24 +56,27 @@ public class LZW extends AbstractAlgorithm {
         System.out.println("You have chosen to compress with LZW!");
         String s = null;
         char k;
-        char seq;
+        String seq;
+        initiateDictionnary();
 
-        for(int i = 0; i < testString.length(); i++){
-            k = testString.charAt(i); //(char)data[i];
+        for(int i = 0; i < dataCode.toString().length(); i++){
+            k = dataCode.toString().charAt(i); //(char)data[i];
 
-            seq = (char)dictionnary.indexOf(k);
+            seq = dictionnary.get(k);
 
             // is this how we check if char is NULL?
-            if (seq == 0){
-                seq = s + s[0];
+            if (seq == null){
+                seq = s + s.charAt(0);
             }
-            dataDecode.add((char)seq);
+            dataDecode.add(seq);
             if (s != null){
-                dictionnary.add(s+seq[0]);
+                dictionnary.add(s+seq.indexOf(0));
             }
 
+            s = seq;
+            System.out.println(dataDecode.toString());
+            System.out.println(dictionnary.toString());
         }
         return null;
     }
-
 }

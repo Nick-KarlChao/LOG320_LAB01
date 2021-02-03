@@ -20,6 +20,7 @@ public class Main {
 
         AbstractAlgorithm algo = new LZW();
         algo.compress(data);
+        algo.decompress(data);
 
         /*switch(args[1]){
             case "-c":
