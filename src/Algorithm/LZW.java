@@ -20,6 +20,7 @@ public class LZW extends AbstractAlgorithm {
     }
 
     private void initiateDictionnary(){
+        dictionnary.clear();
         for(int i = 97; i < 100; i++){
             dictionnary.add((Character.toString((char)i)));
         }
@@ -59,10 +60,14 @@ public class LZW extends AbstractAlgorithm {
         String seq;
         initiateDictionnary();
 
+        System.out.println(dataCode.toString());
+
         for(int i = 0; i < dataCode.toString().length(); i++){
             k = dataCode.toString().charAt(i); //(char)data[i];
 
+            System.out.println(dictionnary.toString());
             seq = dictionnary.get(k);
+
 
             // is this how we check if char is NULL?
             if (seq == null){
