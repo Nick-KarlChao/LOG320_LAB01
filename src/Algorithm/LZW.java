@@ -1,28 +1,26 @@
 package Algorithm;
 
-import Algorithm.AbstractAlgorithm;
-
 import java.util.ArrayList;
 
 public class LZW extends AbstractAlgorithm {
     //to optimize with hashmap at the end
-    private ArrayList<String> dictionnary;
+    private ArrayList<String> dictionary;
     private ArrayList<Integer> dataCode;
     private ArrayList<String> dataDecode;
     private String testString = "ababcbababaaaaaaa";
 
     public LZW(){
         System.out.println("You have chosen LZW!");
-        dictionnary = new ArrayList<>();
-        initiateDictionnary();
+        dictionary = new ArrayList<>();
+        initiateDictionary();
         dataCode = new ArrayList<>();
         dataDecode = new ArrayList<>();
     }
 
-    private void initiateDictionnary(){
-        dictionnary.clear();
+    private void initiateDictionary(){
+        dictionary.clear();
         for(int i = 97; i < 100; i++){
-            dictionnary.add((Character.toString((char)i)));
+            dictionary.add((Character.toString((char)i)));
         }
     }
 
@@ -36,51 +34,53 @@ public class LZW extends AbstractAlgorithm {
 
         for(int i = 1; i < testString.length(); i++){
             c = testString.charAt(i); //(char)data[i];
-            if (dictionnary.contains(s+c)){
+            if (dictionary.contains(s+c)){
                 s=s+c;
             } else {
-                dataCode.add(dictionnary.indexOf(s));
-                dictionnary.add(s+Character.toString(c));
+                dataCode.add(dictionary.indexOf(s));
+                dictionary.add(s+Character.toString(c));
                 s = Character.toString(c);
             }
         }
-        dataCode.add(dictionnary.indexOf(s));
+        dataCode.add(dictionary.indexOf(s));
 
         System.out.println(dataCode.toString());
-        System.out.println(dictionnary.toString());
+        System.out.println(dictionary.toString());
         return null;
     }
 
     @Override
     //fix type of return... not byte[]?
     public byte[] decompress(byte[] data){
-        System.out.println("You have chosen to compress with LZW!");
+        System.out.println("You have chosen to decompress with LZW!");
         String s = null;
-        char k;
-        String seq;
-        initiateDictionnary();
+        int k;
+        String seq = null;
+        initiateDictionary();
 
-        System.out.println(dataCode.toString());
+        for(int i = 0; i < dataCode.size(); i++){
+            k = dataCode.get(i); //(char)data[i];
 
-        for(int i = 0; i < dataCode.toString().length(); i++){
-            k = dataCode.toString().charAt(i); //(char)data[i];
+            if (k < dictionary.size()){
+                seq = dictionary.get(k);
+            } else {
+                seq = null;
+            }
 
-            System.out.println(dictionnary.toString());
-            seq = dictionnary.get(k);
-
-
-            // is this how we check if char is NULL?
             if (seq == null){
                 seq = s + s.charAt(0);
             }
+
             dataDecode.add(seq);
+
             if (s != null){
-                dictionnary.add(s+seq.indexOf(0));
+                dictionary.add(s+seq.charAt(0));
             }
 
             s = seq;
+
             System.out.println(dataDecode.toString());
-            System.out.println(dictionnary.toString());
+            System.out.println(dictionary.toString());
         }
         return null;
     }
