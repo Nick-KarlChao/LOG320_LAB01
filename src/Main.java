@@ -32,13 +32,13 @@ public class Main {
 //        System.out.println(Integer.toHexString(data[1]));
 
         /** THIS IS FOR TEST PURPOSES **/
-        AbstractAlgorithm algo1 = new LZW();
-        algo1.compress(inputData);
-        algo1.decompress(inputData);
+        //AbstractAlgorithm algo1 = new LZW();
+        //algo1.compress(inputData);
+        //algo1.decompress(inputData);
 
-        AbstractAlgorithm algo2 = new Huffman();
-        algo2.compress(inputData);
-        algo2.decompress(inputData);
+        //AbstractAlgorithm algo2 = new Huffman();
+        //algo2.compress(inputData);
+        //algo2.decompress(inputData);
 
         AbstractAlgorithm algo3 = new Optimized();
         algo3.compress(inputData);
