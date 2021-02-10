@@ -15,23 +15,22 @@ public class Main {
 
     public static void main (String[] args) throws IOException {
         AbstractAlgorithm algorithm = (new AlgorithmFactory(args[0])).getAlgorithm();
-        String inputFileName = args[2];
-        String fileType = new ReadFile().fileExtension(inputFileName);
-        String outputFileName = args [3];
-        byte[] inputData = new ReadFile().readFileBytes(inputFileName);
+        String inputFilePath = args[2];
+        String outputFilePath = args [3];
+        byte[] inputData = new ReadFile().readFileBytes(inputFilePath);
         byte[] outputData = null;
 
         String chosenAction = args[1];
         switch (chosenAction){
             case "-c":
                 outputData = algorithm.compress(inputData);
-                new WriteFile().createFile(outputData, outputFileName, fileType);
                 break;
             case "-d":
                 outputData = algorithm.decompress(inputData);
-                new WriteFile().createFile(outputData, outputFileName, fileType);
                 break;
         }
+
+        new WriteFile().createFile(outputData, outputFilePath);
 
 //        System.out.println(Arrays.toString(data));
 //        System.out.println(data.length);

@@ -26,21 +26,6 @@ public class ReadFile {
 
         return fileBytes;
     }
-
-    public String fileExtension(String filePath){
-        String extension = "";
-
-        int index = filePath.lastIndexOf('.');
-        if (filePath == null) {
-            System.out.println("There is not file path.");
-        }
-        if (index > 0){
-            extension = filePath.substring(index + 1);
-        } else {
-            return "";
-        }
-        return extension;
-    }
 }
 
 // https://www.tutorialspoint.com/get-file-extension-name-in-java
