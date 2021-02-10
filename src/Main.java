@@ -2,6 +2,8 @@ import Algorithm.AbstractAlgorithm;
 import Algorithm.Huffman;
 import Algorithm.LZW;
 import Algorithm.Optimized;
+import FileManager.ReadFile;
+import FileManager.WriteFile;
 
 import java.io.IOException;
 import java.nio.file.Files;
@@ -13,16 +15,21 @@ public class Main {
 
     public static void main (String[] args) throws IOException {
         AbstractAlgorithm algorithm = (new AlgorithmFactory(args[0])).getAlgorithm();
-        //readAllBytes will create a temp table that contains the same shit as the original file to comp/decomp
-        byte[] inputData = Files.readAllBytes(Paths.get("src/exemple.txt"));
+        String inputFileName = args[2];
+        String fileType = new ReadFile().fileExtension(inputFileName);
+        String outputFileName = args [3];
+        byte[] inputData = new ReadFile().readFileBytes(inputFileName);
+        byte[] outputData = null;
 
         String chosenAction = args[1];
         switch (chosenAction){
             case "-c":
-                algorithm.compress(inputData);
+                outputData = algorithm.compress(inputData);
+                new WriteFile().createFile(outputData, outputFileName, fileType);
                 break;
             case "-d":
-                algorithm.decompress(inputData);
+                outputData = algorithm.decompress(inputData);
+                new WriteFile().createFile(outputData, outputFileName, fileType);
                 break;
         }
 
