@@ -2,11 +2,11 @@ package Algorithm;
 
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.Optional;
 
 public class Huffman extends AbstractAlgorithm {
     private ArrayList<Node> frequencyTable;
-    private String testString = "accacbcc";
+    //private String testString = "accacbcc";
+    private String testString = "accacbccddaasdddsffgghmmwwwfals";
 
 
     public Huffman(){
@@ -14,6 +14,18 @@ public class Huffman extends AbstractAlgorithm {
         //Node poop = new Node();
         frequencyTable = new ArrayList<>();
         frequencyTable = createFrequencyTable();
+        ArrayList<Integer> testTable = new ArrayList<>();
+        testTable.add(1);
+        testTable.add(5);
+        testTable.add(3);
+        /*for (int i = 0; i < testTable.size(); i++){
+            System.out.println(testTable.get(i));
+        }*/
+
+        System.out.println(testTable.get(0));
+        testTable.remove(0);
+        System.out.println(testTable.get(0));
+        createHuffmanTree();
     }
     @Override
     public byte[] compress(byte[] data){
@@ -64,9 +76,27 @@ public class Huffman extends AbstractAlgorithm {
         return frequencyTable;
     }
 
-    private void createHuffmanTable(){
-        //TODO
-    };
+    private void createHuffmanTree(){
+        while (frequencyTable.size() > 1){
+            Node newNode = new Node();
+            newNode.setFrequency(frequencyTable.get(0).getFrequency()+frequencyTable.get(1).getFrequency());
+            newNode.setLeftChild(frequencyTable.get(0));
+            newNode.setRightChild(frequencyTable.get(1));
+            System.out.println("1st smallest frequency: " + frequencyTable.get(0).getFrequency());
+            System.out.println("2nd smallest frequency: " + frequencyTable.get(1).getFrequency());
+            frequencyTable.remove(0);
+            frequencyTable.remove(0);
+            frequencyTable.add(newNode);
+
+            if(frequencyTable.indexOf(newNode)>0){
+                while (newNode.getFrequency() < frequencyTable.get((frequencyTable.indexOf(newNode))-1).getFrequency()){
+                    Collections.swap(frequencyTable, frequencyTable.indexOf(newNode), frequencyTable.indexOf(newNode)-1);
+                }
+            }
+            System.out.println("table size: " + frequencyTable.size());
+        }
+        System.out.println("final node frequency: " + frequencyTable.get(0).getFrequency());
+    }
 
     private void encode(){
         //TODO
@@ -75,7 +105,8 @@ public class Huffman extends AbstractAlgorithm {
     public static class Node implements Comparable<Node>{
         private int value;
         private int frequency;
-        private static Node instance;
+        private Node leftChild;
+        private Node rightChild;
 
         Node(){
             this.frequency = 0;
@@ -106,11 +137,20 @@ public class Huffman extends AbstractAlgorithm {
             this.frequency++;
         }
 
-        public static Node getInstance() {
-            if (instance == null) {
-                instance = new Node();
-            }
-            return instance;
+        public Node getRightChild() {
+            return rightChild;
+        }
+
+        public void setRightChild(Node rightChild) {
+            this.rightChild = rightChild;
+        }
+
+        public Node getLeftChild() {
+            return leftChild;
+        }
+
+        public void setLeftChild(Node leftChild) {
+            this.leftChild = leftChild;
         }
     }
 }
