@@ -25,13 +25,12 @@ public class Main {
         switch (chosenAction){
             case "-c":
                 outputData = algorithm.compress(inputData);
-                new WriteFile().createFile(outputData, outputFileName, fileType);
                 break;
             case "-d":
                 outputData = algorithm.decompress(inputData);
-                new WriteFile().createFile(outputData, outputFileName, fileType);
                 break;
         }
+        new WriteFile().createFile(outputData, outputFileName, fileType);
 
 //        System.out.println(Arrays.toString(data));
 //        System.out.println(data.length);
