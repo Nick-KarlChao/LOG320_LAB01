@@ -8,7 +8,6 @@ public class Huffman extends AbstractAlgorithm {
     private ArrayList<Node> frequencyTable;
     private String testString = "accacbcc";
 
-
     public Huffman(){
         System.out.println("You have chosen Huffman!");
         //Node poop = new Node();
@@ -65,22 +64,32 @@ public class Huffman extends AbstractAlgorithm {
     }
 
     private void createHuffmanTable(){
-        //TODO
+        Node rootNode = new Node();
+
+        if (rootNode == null){
+
+        }
     };
 
     private void encode(){
         //TODO
     };
 
-    public static class Node implements Comparable<Node>{
+    public static class Node implements Comparable<Node> {
         private int value;
         private int frequency;
         private static Node instance;
+        private Node leftChild;
+        private Node rightChild;
 
-        Node(){
+        Node() {
             this.frequency = 0;
         }
 
+        Node(int value, int frequency) {
+            this.value = value;
+            this.frequency = frequency;
+        }
 
         public int getFrequency() {
             return frequency;
@@ -94,15 +103,15 @@ public class Huffman extends AbstractAlgorithm {
             return value;
         }
 
-        public void setValue(int value){
+        public void setValue(int value) {
             this.value = value;
         }
 
-        public int compareTo(Node n){
+        public int compareTo(Node n) {
             return 0;
         }
 
-        public void incrementFrequency(){
+        public void incrementFrequency() {
             this.frequency++;
         }
 
