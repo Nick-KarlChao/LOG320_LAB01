@@ -29,7 +29,6 @@ public class Main {
                 outputData = algorithm.decompress(inputData);
                 break;
         }
-
         new WriteFile().createFile(outputData, outputFilePath);
 
 //        System.out.println(Arrays.toString(data));
