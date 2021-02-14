@@ -5,11 +5,10 @@ import Algorithm.Optimized;
 import FileManager.ReadFile;
 import FileManager.WriteFile;
 
+import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
-import java.util.Arrays;
+
 
 public class Main {
 
@@ -17,7 +16,8 @@ public class Main {
         AbstractAlgorithm algorithm = (new AlgorithmFactory(args[0])).getAlgorithm();
         String inputFilePath = args[2];
         String outputFilePath = args [3];
-        byte[] inputData = new ReadFile().readFileBytes(inputFilePath);
+        File f = new File(args[2]);
+        byte[] inputData = Files.readAllBytes(f.toPath());
         byte[] outputData = null;
 
         String chosenAction = args[1];
@@ -41,13 +41,13 @@ public class Main {
         //algo1.compress(inputData);
         //algo1.decompress(inputData);
 
-        //AbstractAlgorithm algo2 = new Huffman();
-        //algo2.compress(inputData);
-        //algo2.decompress(inputData);
+        AbstractAlgorithm algo2 = new Huffman();
+        algo2.compress(inputData);
+        algo2.decompress(inputData);
 
-        AbstractAlgorithm algo3 = new Optimized();
-        algo3.compress(inputData);
-        algo3.decompress(inputData);
+//        AbstractAlgorithm algo3 = new Optimized();
+//        algo3.compress(inputData);
+//        algo3.decompress(inputData);
 
         /*switch(args[1]){
             case "-c":
