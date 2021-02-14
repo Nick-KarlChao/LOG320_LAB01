@@ -10,8 +10,8 @@ public class WriteFile {
 
     public WriteFile(){}
 
-    public void createFile(byte[] data, String fileName, String fileType) throws IOException {
-        String fileID = fileName + fileType;
+    public void createFile(byte[] data, String fileName) throws IOException {
+        String fileID = fileName;
         try{
             File newFile = new File(".", fileID);
             if(newFile.exists()){
@@ -25,11 +25,6 @@ public class WriteFile {
             e.printStackTrace();
         }
     }
-
-//    private byte[] convertStringToByte(String data){
-//        byte[] outputData = data.getBytes(StandardCharsets.UTF_8);
-//        return outputData;
-//    }
 }
 
 // https://www.w3schools.com/java/java_files_create.asp
