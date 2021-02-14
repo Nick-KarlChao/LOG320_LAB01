@@ -25,11 +25,6 @@ public class WriteFile {
             e.printStackTrace();
         }
     }
-
-//    private byte[] convertStringToByte(String data){
-//        byte[] outputData = data.getBytes(StandardCharsets.UTF_8);
-//        return outputData;
-//    }
 }
 
 // https://www.w3schools.com/java/java_files_create.asp
