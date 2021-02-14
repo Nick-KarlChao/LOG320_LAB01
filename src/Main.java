@@ -48,30 +48,9 @@ public class Main {
         //algo2.compress(inputData);
         //algo2.decompress(inputData);
 
-        AbstractAlgorithm algo3 = new Optimized();
-        algo3.compress(inputData);
-        algo3.decompress(inputData);
+//        AbstractAlgorithm algo3 = new Optimized();
+//        algo3.compress(inputData);
+//        algo3.decompress(inputData);
 
-        /*switch(args[1]){
-            case "-c":
-                //compress will create temp table with compressed data and then we use that table to create a new file
-                byte[] compressedData = algorithm.compress(data);
-
-                // These lines are to check size of data vs compressed data TEST PURPOSES
-                System.out.println("Original data: "+ data.length);
-                System.out.println("Original data: "+ compressedData.length);
-                break;
-            case "-d":
-                //decompress will create temp table with decompressed data and then we use that table to create a new file
-                byte[] decompressedData = algorithm.decompress(data);
-
-                // These lines are to check size of data vs decompressed data TEST PURPOSES
-                System.out.println("Original data: "+ data.length);
-                System.out.println("Original data: "+ decompressedData.length);
-                break;
-            default:
-                System.out.println("that wasn't D or C you fuck");
-        }
-*/
     }
 }

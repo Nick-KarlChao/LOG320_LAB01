@@ -8,6 +8,8 @@ import java.util.Collections;
 //TODO
 public class Huffman extends AbstractAlgorithm {
     private static final int FREQU_CONSTANT = 48;
+    private static final int HEADER_LENGTH = 5;
+    private static final int BYTE_LENGTH = 8;
     private ArrayList<Node> frequencyTable;
     private ArrayList<Node> huffmanTree;
     //private String testString = "accacbcc";
@@ -38,6 +40,7 @@ public class Huffman extends AbstractAlgorithm {
             }
         }
         //System.out.println("Encoded data: " + encodedData);
+
         return encodedData.toByteArray();
     }
 
@@ -91,20 +94,6 @@ public class Huffman extends AbstractAlgorithm {
         return header.toByteArray();
     }
 
-    /**
-     * Removes header and returns the frequency table detected
-     * @return
-     */
-    private byte[] removeHeader(byte[] data){
-        String separator = "\\||//";
-
-        for(Byte b: data){
-
-        }
-
-
-    }
-
     private void createHuffmanTree(){
         huffmanTree = new ArrayList<>(frequencyTable);
         while (huffmanTree.size() > 1){
@@ -156,12 +145,70 @@ public class Huffman extends AbstractAlgorithm {
         }
     }
 
+    /**
+     * Removes header and returns the frequency table detected
+     */
+    private int headerEndPosition(byte[] data){
+        int index = HEADER_LENGTH;
+        int headerEnd = -1;
+
+        while (!reachedEndHeader(index, data)){
+            headerEnd++;
+        }
+
+        return headerEnd;
+    }
+
+    private boolean reachedEndHeader (int index, byte[] data){
+
+        if (data[index] == '\\'){
+            index++;
+            if(data[index] == '|'){
+                index++;
+                if( data[index] == '|'){
+                    index++;
+                    if (data[index] == '/'){
+                        index++;
+                        if (data[index] == '/'){
+                            return true;
+                        }
+                    }
+                }
+            }
+        }
+        return false;
+    }
+
+    private void rebuildFrequencyTable(byte[] data){
+        int index = HEADER_LENGTH;
+        frequencyTable.clear();
+
+        while (index != headerEndPosition(data)) {
+            Node tableElement = new Node();
+            tableElement.setValue(data[index]);
+            tableElement.setFrequency(data[index + 1]);
+            frequencyTable.add(tableElement);
+            index++;
+        }
+    }
+
     @Override
     public byte[] decompress(byte[] data){
         System.out.println("You have chosen to compress with Huffman!");
         ByteArrayOutputStream decodedData = new ByteArrayOutputStream();
+        int dataIndex = headerEndPosition(data) + HEADER_LENGTH;
 
+        rebuildFrequencyTable(data);
+        createHuffmanTree();
 
+        //TODO
+        for(int i = dataIndex; i < data.length - dataIndex; i++){
+            for (int j = 0; j < frequencyTable.size(); j++){
+                if (String.valueOf(data[dataIndex]) == frequencyTable.get(j).getCode().getBytes().toString()){
+                    decodedData.write(frequencyTable.get(j).getValue());
+                }
+            }
+        }
 
         return decodedData.toByteArray();
     }
