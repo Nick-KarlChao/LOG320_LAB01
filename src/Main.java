@@ -30,7 +30,7 @@ public class Main {
                 outputData = algorithm.decompress(inputData);
                 break;
         }
-        new WriteFile().createFile(outputData, outputFileName, fileType);
+        new WriteFile().createFile(outputData, outputFileName);
 
 //        System.out.println(Arrays.toString(data));
 //        System.out.println(data.length);

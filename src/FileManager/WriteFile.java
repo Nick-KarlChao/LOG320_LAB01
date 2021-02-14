@@ -10,8 +10,8 @@ public class WriteFile {
 
     public WriteFile(){}
 
-    public void createFile(byte[] data, String fileName, String fileType) throws IOException {
-        String fileID = fileName + fileType;
+    public void createFile(byte[] data, String fileName) throws IOException {
+        String fileID = fileName;
         try{
             File newFile = new File(".", fileID);
             if(newFile.exists()){
