@@ -12,8 +12,6 @@ public class Huffman extends AbstractAlgorithm {
     private static final int BYTE_LENGTH = 8;
     private ArrayList<Node> frequencyTable;
     private ArrayList<Node> huffmanTree;
-    //private String testString = "accacbcc";
-    //private String testString = "accacbccddaasdddsffgghmmwwwfals";
 
     public Huffman(){
         System.out.println("You have chosen Huffman!");
@@ -27,7 +25,7 @@ public class Huffman extends AbstractAlgorithm {
         createFrequencyTable(data);
         //createHeader();
         createHuffmanTree();
-        encode();
+        exploreNodes(huffmanTree.get(0), "");
 
         ByteArrayOutputStream encodedData = new ByteArrayOutputStream();
         encodedData.write(createHeader());
@@ -44,7 +42,7 @@ public class Huffman extends AbstractAlgorithm {
         return encodedData.toByteArray();
     }
 
-    private ArrayList<Node> createFrequencyTable(byte[] data){
+    private void createFrequencyTable(byte[] data){
         System.out.println();
         frequencyTable.clear();
         Node tempNode = new Node();
@@ -76,7 +74,6 @@ public class Huffman extends AbstractAlgorithm {
         for (int i = 0; i < frequencyTable.size(); i++){
             System.out.println(frequencyTable.get(i).getValue() + " - " + frequencyTable.get(i).getFrequency());
         }
-        return frequencyTable;
     }
 
     private byte[] createHeader() throws IOException {
@@ -102,8 +99,8 @@ public class Huffman extends AbstractAlgorithm {
             huffmanTree.get(0).setLeftChildStatus(true);
             newNode.setLeftChild(huffmanTree.get(0));
             newNode.setRightChild(huffmanTree.get(1));
-            System.out.println("1st smallest frequency: " + huffmanTree.get(0).getFrequency());
-            System.out.println("2nd smallest frequency: " + huffmanTree.get(1).getFrequency());
+            System.out.println("left child: " + huffmanTree.get(0).getFrequency());
+            System.out.println("right child: " + huffmanTree.get(1).getFrequency());
             huffmanTree.remove(0);
             huffmanTree.remove(0);
             huffmanTree.add(newNode);
@@ -118,10 +115,6 @@ public class Huffman extends AbstractAlgorithm {
         System.out.println("final node frequency: " + huffmanTree.get(0).getFrequency());
     }
 
-    private void encode(){
-        String code = "";
-        exploreNodes(huffmanTree.get(0), code);
-    }
 
     private void exploreNodes(Node currentNode,  String code){
         if (currentNode == null){
@@ -188,7 +181,7 @@ public class Huffman extends AbstractAlgorithm {
             tableElement.setValue(data[index]);
             tableElement.setFrequency(data[index + 1]);
             frequencyTable.add(tableElement);
-            index++;
+            index = index + 2;
         }
     }
 

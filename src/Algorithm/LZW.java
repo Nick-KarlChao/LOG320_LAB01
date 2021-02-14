@@ -83,7 +83,7 @@ public class LZW extends AbstractAlgorithm {
         for(int i = 0; i < tempString.length(); i++){
             //k = (char)data[i]; //(char)data[i];
             //k = tempString.charAt(i);
-            char k = (char)data[i];
+            char k = tempString.charAt(i);
             System.out.println("what's about to get added:" + k);
 
             if (k < dictionary.size()){
