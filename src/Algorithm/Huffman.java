@@ -47,7 +47,7 @@ public class Huffman extends AbstractAlgorithm {
                 }
             }
         }
-        System.out.println("Encoded data: " + encodedData);
+        //System.out.println("Encoded data: " + encodedData);
         return encodedData.toByteArray();
     }
 
@@ -83,10 +83,6 @@ public class Huffman extends AbstractAlgorithm {
                 Collections.swap(frequencyTable, j, j+1);
                 j--;
             }
-        }
-        System.out.println("Node values and frequencies test:");
-        for (int i = 0; i < frequencyTable.size(); i++){
-            System.out.println(frequencyTable.get(i).getValue() + " - " + frequencyTable.get(i).getFrequency());
         }
     }
 
@@ -138,9 +134,9 @@ public class Huffman extends AbstractAlgorithm {
                     Collections.swap(huffmanTree, huffmanTree.indexOf(newNode), huffmanTree.indexOf(newNode)-1);
                 }
             }
-            System.out.println("table size: " + huffmanTree.size());
+            //System.out.println("table size: " + huffmanTree.size());
         }
-        System.out.println("final node frequency: " + huffmanTree.get(0).getFrequency());
+        //System.out.println("final node frequency: " + huffmanTree.get(0).getFrequency());
     }
 
     /**
@@ -165,7 +161,7 @@ public class Huffman extends AbstractAlgorithm {
 
         if (currentNode.getLeftChild() == null && currentNode.getRightChild() == null){
             currentNode.setCode(code);
-            System.out.println(code);
+            //System.out.println(code);
         } else {
             encodeNodes(currentNode.getLeftChild(), code);
             encodeNodes(currentNode.getRightChild(), code);
@@ -259,7 +255,6 @@ public class Huffman extends AbstractAlgorithm {
                 }
             }
         }
-
         return decodedData.toByteArray();
     }
 

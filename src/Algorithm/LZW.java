@@ -13,7 +13,7 @@ public class LZW extends AbstractAlgorithm {
     private ArrayList<String> dictionary;
     private ArrayList<Integer> dataCode;
     private ArrayList<String> dataDecode;
-    private String tempString = "ababcbababaaaaaaa";
+    private String tempString;
 
     public LZW(){
         System.out.println("You have chosen LZW!");
