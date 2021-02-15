@@ -12,6 +12,14 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.Arrays;
 
+/**
+ * LOG320 - LAB 01
+ * The purpose of this lab is to conceptualize and implement 2 compression algorithms:
+ * LZW and Huffman. The program is to compress and decompress files of all types using
+ * terminal commands.
+ * Written by Nick-Karl Chao and Ai-Vi Nguyen.
+ * Date: 14/02/2021
+ */
 public class Main {
 
     public static void main (String[] args) throws IOException {
@@ -21,7 +29,6 @@ public class Main {
         File f = new File(inputFilePath);
         byte[] inputData = new ReadFile().readFileBytes(inputFilePath);
         byte[] outputData = null;
-
 
         String chosenAction = args[1];
         switch (chosenAction){
@@ -33,24 +40,5 @@ public class Main {
                 break;
         }
         new WriteFile().createFile(outputData, outputFilePath);
-
-//        System.out.println(Arrays.toString(data));
-//        System.out.println(data.length);
-//        System.out.println(data);
-//        System.out.println(Integer.toHexString(data[1]));
-
-        /** THIS IS FOR TEST PURPOSES **/
-        //AbstractAlgorithm algo1 = new LZW();
-        //algo1.compress(inputData);
-        //algo1.decompress(inputData);
-
-        //AbstractAlgorithm algo2 = new Huffman();
-        //algo2.compress(inputData);
-        //algo2.decompress(inputData);
-
-//        AbstractAlgorithm algo3 = new Optimized();
-//        algo3.compress(inputData);
-//        algo3.decompress(inputData);
-
     }
 }

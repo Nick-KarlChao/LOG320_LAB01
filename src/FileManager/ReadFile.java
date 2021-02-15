@@ -5,6 +5,11 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 
+/**
+ * This class takes care of the file readings. The code is based on
+ * https://www.tutorialspoint.com/get-file-extension-name-in-java and
+ * written by Nick-Karl Chao and Ai-Vi Nguyen.
+ */
 public class ReadFile {
 
     public ReadFile() {
@@ -27,5 +32,3 @@ public class ReadFile {
         return fileBytes;
     }
 }
-
-// https://www.tutorialspoint.com/get-file-extension-name-in-java
