@@ -11,14 +11,12 @@ public class Optimized extends AbstractAlgorithm {
     @Override
     public byte[] compress(byte[] data){
         System.out.println("You have chosen to compress!");
-        //TODO
         return null;
     }
 
     @Override
     public byte[] decompress(byte[] data){
         System.out.println("You have chosen to compress!");
-        //TODO
         return null;
     }
 }

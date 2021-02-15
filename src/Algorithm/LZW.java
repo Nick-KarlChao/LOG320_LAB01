@@ -27,17 +27,12 @@ public class LZW extends AbstractAlgorithm {
     }
 
     @Override
-    //fix type of return... not byte[]?
     public byte[] compress(byte[] data){
         System.out.println("You have chosen to compress with LZW!");
         initiateDictionary();
         tempString = new String(data, StandardCharsets.UTF_8);
-
-        //test SOUT'ing
         //System.out.println("string to compress: " + tempString);
         String s = Character.toString(tempString.charAt(0)); //Character.toString((char)data[1]);
-
-        int poopindex = 0;
 
         for(int i = 1; i < tempString.length(); i++){
             char c = tempString.charAt(i); //(char)data[i];
@@ -46,8 +41,6 @@ public class LZW extends AbstractAlgorithm {
             } else {
                 dataCode.add(dictionary.indexOf(s));
                 //System.out.println(dictionary.indexOf(s));
-                poopindex++;
-                System.out.println("poop" + poopindex);
                 dictionary.add(s+c);
                 s = Character.toString(c);
             }
@@ -57,12 +50,6 @@ public class LZW extends AbstractAlgorithm {
 
         System.out.println("NEED TO TEST:" + dictionary.indexOf(s));
 
-        //more test SOUT'ing
-        /*System.out.println("NEED TO TEST THIS:" + dataCode.toString().
-                replaceAll("]", "").
-                replaceAll("\\[", "").
-                replaceAll(",", ""));*/
-        //System.out.println(dictionary.toString());
         return dataCode.toString().
                 replaceAll("]", "").
                 replaceAll("\\[", "").
@@ -71,20 +58,16 @@ public class LZW extends AbstractAlgorithm {
     }
 
     @Override
-    //fix type of return... not byte[]?
     public byte[] decompress(byte[] data){
         System.out.println("You have chosen to decompress with LZW!");
         initiateDictionary();
         String s = null;
         String seq = null;
         tempString = new String(data, StandardCharsets.UTF_8);
-        System.out.println(tempString);
 
         for(int i = 0; i < tempString.length(); i++){
-            //k = (char)data[i]; //(char)data[i];
-            //k = tempString.charAt(i);
             char k = tempString.charAt(i);
-            System.out.println("what's about to get added:" + k);
+            //System.out.println("what's about to get added:" + k);
 
             if (k < dictionary.size()){
                 seq = dictionary.get(k);
@@ -97,7 +80,6 @@ public class LZW extends AbstractAlgorithm {
             }
 
             dataDecode.add(seq);
-            System.out.println("what's added:" + seq);
 
             if (s != null){
                 dictionary.add(s+seq.charAt(0));
@@ -105,8 +87,7 @@ public class LZW extends AbstractAlgorithm {
 
             s = seq;
 
-            System.out.println(dataDecode.toString());
-            //System.out.println(dictionary.toString());
+            //System.out.println(dataDecode.toString());
         }
         return dataDecode.toString().getBytes(StandardCharsets.UTF_8);
     }

@@ -9,11 +9,8 @@ import java.util.Collections;
 public class Huffman extends AbstractAlgorithm {
     private static final int FREQU_CONSTANT = 48;
     private static final int HEADER_LENGTH = 5;
-    private static final int BYTE_LENGTH = 8;
     private ArrayList<Node> frequencyTable;
     private ArrayList<Node> huffmanTree;
-    //private String testString = "accacbcc";
-    //private String testString = "accacbccddaasdddsffgghmmwwwfals";
 
     public Huffman(){
         System.out.println("You have chosen Huffman!");
@@ -25,7 +22,6 @@ public class Huffman extends AbstractAlgorithm {
     public byte[] compress(byte[] data) throws IOException {
         System.out.println("You have chosen to compress with Huffman!");
         createFrequencyTable(data);
-        //createHeader();
         createHuffmanTree();
         encodeNodes(huffmanTree.get(0), "");
 
@@ -39,8 +35,7 @@ public class Huffman extends AbstractAlgorithm {
                 }
             }
         }
-        //System.out.println("Encoded data: " + encodedData);
-
+        System.out.println("Encoded data: " + encodedData);
         return encodedData.toByteArray();
     }
 
@@ -51,7 +46,7 @@ public class Huffman extends AbstractAlgorithm {
         for (int i = 0; i < data.length; i++){
             int c = data[i];
             tempNode.setValue(data[i]);
-            //if (frequencyTable.contains(node with specific value){
+            //if (frequencyTable.contains(node with specific value)
             if (frequencyTable.stream().anyMatch(o -> o.getValue() == tempNode.getValue())){
                 //increment frequency of the specific node
                 frequencyTable.stream().filter(o -> o.getValue() == tempNode.getValue()).findFirst().get().incrementFrequency();
@@ -153,7 +148,6 @@ public class Huffman extends AbstractAlgorithm {
     }
 
     private boolean reachedEndHeader (int index, byte[] data){
-
         if (data[index] == '\\'){
             index++;
             if(data[index] == '|'){
@@ -266,10 +260,6 @@ public class Huffman extends AbstractAlgorithm {
 
         public void setLeftChildStatus(boolean status){
             this.isLeftChild = status;
-        }
-
-        public boolean isLeftChild(){
-            return  isLeftChild;
         }
 
         public byte[] nodeAttributes(){
