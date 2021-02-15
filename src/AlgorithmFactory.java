@@ -18,9 +18,8 @@ public class AlgorithmFactory {
                 algorithm = new Optimized();
                 break;
             default:
-                System.out.println("that wasn't an algorithm what the shit");
+                System.out.println("That wasn't an algorithm!");
         }
-        //TODO : implement switch case
         return null;
     }
 

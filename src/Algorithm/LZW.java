@@ -46,7 +46,7 @@ public class LZW extends AbstractAlgorithm {
         initiateDictionary();
         tempString = new String(data, StandardCharsets.UTF_8);
         //System.out.println("string to compress: " + tempString);
-        String s = Character.toString(tempString.charAt(0)); //Character.toString((char)data[1]);
+        String s = Character.toString(tempString.charAt(0));
 
         for(int i = 1; i < tempString.length(); i++){
             char c = tempString.charAt(i); //(char)data[i];

@@ -253,7 +253,8 @@ public class Huffman extends AbstractAlgorithm {
 
         for(int i = dataIndex; i < data.length - dataIndex; i++){
             for (int j = 0; j < frequencyTable.size(); j++){
-                if (String.valueOf(data[dataIndex]) == frequencyTable.get(j).getCode().getBytes().toString()){
+                if (String.valueOf(data[dataIndex]) == frequencyTable.
+                            get(j).getCode().getBytes().toString()){
                     decodedData.write(frequencyTable.get(j).getValue());
                 }
             }
