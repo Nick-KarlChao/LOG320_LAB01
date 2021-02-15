@@ -5,15 +5,16 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
 
-//TODO
+/**
+ * Class containing Huffman algorithm. Class extends from AbstractAlgorithm.
+ * Written by Nick-Karl Chao and Ai-Vi Nguyen.
+ */
 public class Huffman extends AbstractAlgorithm {
     private static final int FREQU_CONSTANT = 48;
     private static final int HEADER_LENGTH = 5;
     private static final int BYTE_LENGTH = 8;
     private ArrayList<Node> frequencyTable;
     private ArrayList<Node> huffmanTree;
-    //private String testString = "accacbcc";
-    //private String testString = "accacbccddaasdddsffgghmmwwwfals";
 
     public Huffman(){
         System.out.println("You have chosen Huffman!");
@@ -21,6 +22,15 @@ public class Huffman extends AbstractAlgorithm {
         huffmanTree = new ArrayList<>();
     }
 
+    /**
+     * This functions call upon all required subsequent functions and methods
+     * necessary to compress a byte array using the Huffman algorithm. After
+     * creating a frequency table based on the input data bytes, it creates a
+     * tree of nodes that will be use to encode the different bytes.
+     * @param data the byte array extracted from the file.
+     * @return encodedData in the form of a byte array
+     * @throws IOException
+     */
     @Override
     public byte[] compress(byte[] data) throws IOException {
         System.out.println("You have chosen to compress with Huffman!");
@@ -44,6 +54,12 @@ public class Huffman extends AbstractAlgorithm {
         return encodedData.toByteArray();
     }
 
+    /**
+     * This method creates a frequency table based on the how many times a byte is repeated.
+     * The table is then ordered in order of frequency before being transformed into a tree.
+     * Each table contains Nodes (see internal class).
+     * @param data the byte array extracted from the file.
+     */
     private void createFrequencyTable(byte[] data){
         frequencyTable.clear();
         Node tempNode = new Node();
@@ -77,6 +93,14 @@ public class Huffman extends AbstractAlgorithm {
         }
     }
 
+    /**
+     * This function creates a header that encapsulates the frequency table.
+     * It contains a specific separator that will be detected at a later time
+     * so that the a new frequency table can be recreated in order to decompress
+     * a byte array that was compressed with this specific algorithm.
+     * @return header in the form of an Array.
+     * @throws IOException
+     */
     private byte[] createHeader() throws IOException {
         ByteArrayOutputStream header = new ByteArrayOutputStream();
         String separator = "\\||//";
@@ -92,6 +116,12 @@ public class Huffman extends AbstractAlgorithm {
         return header.toByteArray();
     }
 
+    /**
+     * This method creates a tree using the duplicate of the frequency table.
+     * It uses 2 nodes at a time creating a new node to join both, now his children.
+     * The nodes will be sequentially removed from the table until there remains just
+     * one new Node, which will be the root node.
+     */
     private void createHuffmanTree(){
         huffmanTree = new ArrayList<>(frequencyTable);
         while (huffmanTree.size() > 1){
@@ -116,6 +146,13 @@ public class Huffman extends AbstractAlgorithm {
         System.out.println("final node frequency: " + huffmanTree.get(0).getFrequency());
     }
 
+    /**
+     * This recursive method will explore the trees in order to get a code for each leaf.
+     * As it traverses the tree node by node, it adds either a 0 or a 1 to the
+     * code. Once it reaches a leaf, it will append that code to that Node.
+     * @param currentNode starts with the root node, and changes to travel the tree
+     * @param code the code associated with each node that will be used to encode
+     */
     private void encodeNodes(Node currentNode,  String code){
         if (currentNode == null){
             return;
@@ -139,7 +176,12 @@ public class Huffman extends AbstractAlgorithm {
     }
 
     /**
-     * Removes header and returns the frequency table detected
+     * This function explores the beginning of a the data array to detect
+     * the position where the second separator starts. This is needed in order
+     * to separate the actual compressed data from the frequency table that's
+     * encoded at the beginning of the compressed bytes.
+     * @param data the byte array extracted from the file.
+     * @return headerEnd index where the second
      */
     private int headerEndPosition(byte[] data){
         int index = HEADER_LENGTH;
@@ -149,9 +191,15 @@ public class Huffman extends AbstractAlgorithm {
             headerEnd++;
         }
 
-        return headerEnd;
+        return headerEnd + index;
     }
 
+    /**
+     * This function detects when the second separator is reached.
+     * @param index current position in the data array
+     * @param data the byte array extracted from the file.
+     * @return true when index reaches the end of the header
+     */
     private boolean reachedEndHeader (int index, byte[] data){
 
         if (data[index] == '\\'){
@@ -172,6 +220,12 @@ public class Huffman extends AbstractAlgorithm {
         return false;
     }
 
+    /**
+     * This method will rebuild the frequency table by extracting the data
+     * in the header of the input data array. It will create new Nodes using
+     * the first byte as the value and the second byte as the frequency.
+     * @param data input data array
+     */
     private void rebuildFrequencyTable(byte[] data){
         int index = HEADER_LENGTH;
         frequencyTable.clear();
@@ -185,11 +239,18 @@ public class Huffman extends AbstractAlgorithm {
         }
     }
 
+    /**
+     * This function decompresses the input data array by calling all necessary methods.
+     * It then reverses the compression method by comparing the input data bytes to the new
+     * frequency table and extracting the value from the code.
+     * @param data input data array extracted from file
+     * @return decodedData in the form of an array
+     */
     @Override
     public byte[] decompress(byte[] data){
         System.out.println("You have chosen to compress with Huffman!");
         ByteArrayOutputStream decodedData = new ByteArrayOutputStream();
-        int dataIndex = headerEndPosition(data) + HEADER_LENGTH;
+        int dataIndex = headerEndPosition(data);
 
         rebuildFrequencyTable(data);
         createHuffmanTree();
@@ -205,6 +266,10 @@ public class Huffman extends AbstractAlgorithm {
         return decodedData.toByteArray();
     }
 
+    /**
+     * This internal class contains attribtues for the a Node. This Node type
+     * is used to create 2 arrayLists.
+     */
     public static class Node implements Comparable<Node>{
         private int value;
         private int frequency;

@@ -5,7 +5,11 @@ import java.io.FileOutputStream;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
-
+/**
+ * This class takes care of the file writing. The code is based on
+ * https://www.w3schools.com/java/java_files_create.asp and
+ * written by Nick-Karl Chao and Ai-Vi Nguyen.
+ */
 public class WriteFile {
 
     public WriteFile(){}
@@ -26,5 +30,3 @@ public class WriteFile {
         }
     }
 }
-
-// https://www.w3schools.com/java/java_files_create.asp

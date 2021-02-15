@@ -3,7 +3,10 @@ package Algorithm;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 
-
+/**
+ * Class containing LZW algorithm. Class extends from AbstractAlgorithm.
+ * Written by Nick-Karl Chao and Ai-Vi Nguyen.
+ */
 public class LZW extends AbstractAlgorithm {
     private static final int DICT_INIT_SIZE = 256;
     //to optimize with hashmap at the end
@@ -19,6 +22,10 @@ public class LZW extends AbstractAlgorithm {
         dataDecode = new ArrayList<>();
     }
 
+    /**
+     * Initiate dictionnary with the intial size containing
+     * all bytes characters existing in ASCII alphabet.
+     */
     private void initiateDictionary(){
         dictionary.clear();
         for(int i = 0; i < DICT_INIT_SIZE; i++){
@@ -26,8 +33,14 @@ public class LZW extends AbstractAlgorithm {
         }
     }
 
+    /**
+     * This function iterates through the dictionnary created to compress the
+     * data by creating entries for repeatings chains of bytes; therefore, it
+     * will compress the data by coding it with a new table of equivalences.
+     * @param data the byte array extracted from the file.
+     * @return dataCode, an array of byte transformed from the original data
+     */
     @Override
-    //fix type of return... not byte[]?
     public byte[] compress(byte[] data){
         System.out.println("You have chosen to compress with LZW!");
         initiateDictionary();
@@ -70,8 +83,14 @@ public class LZW extends AbstractAlgorithm {
                 getBytes(StandardCharsets.UTF_8);
     }
 
+    /**
+     * This function iterates through the data and repopulates the dictionnary
+     * based new bytes encountered. As this happens, the original message is
+     * decoded by comapring the coded byte to the values in the dictionnary.
+     * @param data the byte array extracted from the file.
+     * @return dataDecode, an array of byte decoded from the input data
+     */
     @Override
-    //fix type of return... not byte[]?
     public byte[] decompress(byte[] data){
         System.out.println("You have chosen to decompress with LZW!");
         initiateDictionary();
